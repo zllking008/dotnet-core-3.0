@@ -24,19 +24,35 @@ namespace Three
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
+                //开发环境进入此判断
                 app.UseDeveloperExceptionPage();
             }
+            //静态文件中间件
+            app.UseStaticFiles();
 
+            //强制跳转HTTPS的中间件
+            app.UseHttpsRedirection();
+
+            //身份认证 必须放在UseEndpoints之前
+            app.UseAuthentication();
+            //路由中间件
             app.UseRouting();
 
+            //端点中间件
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
                 {
                     await context.Response.WriteAsync("Hello World!");
                 });
+
+                //endpoints.MapControllers();//attr方法
+                //endpoints.MapControllerRoute(
+                //    "default",
+                //    "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
