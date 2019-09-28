@@ -13,6 +13,7 @@ namespace Three
 {
     public class Startup
     {
+
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddMvc(); MVC的所有功能，很全面，引入也很多
@@ -21,10 +22,15 @@ namespace Three
             //services.AddRazorPages();//使用RazorPage模式
             services.AddSingleton<IClock, ChinaClock>();
         }
-
+        //public void ConfigureDevelopment(IApplicationBuilder app, IWebHostEnvironment env)
+        //{
+        //    //开发环境进入
+        //}
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
+            //env.IsProduction();
+            //env.IsStaging();
+            //env.IsEnvironment("OK");
             if (env.IsDevelopment())
             {
                 //开发环境进入此判断

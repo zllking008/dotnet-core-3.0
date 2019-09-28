@@ -22,6 +22,8 @@ namespace Three
                 {
                     //webBuilder.ConfigureAppConfiguration();
                     webBuilder.UseStartup<Startup>();
+                    //webBuilder.UseStartup(typeof(Program));//引用程序集
+                    //webBuilder.UseKestrel();
                 });
     }
 }
