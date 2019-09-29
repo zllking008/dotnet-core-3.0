@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,15 +16,19 @@ namespace Three
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddMvc(); MVCµÄËùÓĞ¹¦ÄÜ£¬ºÜÈ«Ãæ£¬ÒıÈëÒ²ºÜ¶à
-            services.AddControllersWithViews();//MVCµÄÖ÷Òª¹¦ÄÜ£¬webÍøÕ¾ÊÊÓÃ
-            //services.AddControllers();//½öÊ¹ÓÃapi ×¢²á
-            //services.AddRazorPages();//Ê¹ÓÃRazorPageÄ£Ê½
-            services.AddSingleton<IClock, ChinaClock>();
+            //services.AddMvc(); MVCçš„æ‰€æœ‰åŠŸèƒ½ï¼Œå¾ˆå…¨é¢ï¼Œå¼•å…¥ä¹Ÿå¾ˆå¤š
+            services.AddControllersWithViews();//MVCçš„ä¸»è¦åŠŸèƒ½ï¼Œwebç½‘ç«™é€‚ç”¨
+            //services.AddControllers();//ä»…ä½¿ç”¨api æ³¨å†Œ
+            //services.AddRazorPages();//ä½¿ç”¨RazorPageæ¨¡å¼
+            //services.AddSingleton<IClock, ChinaClock>();
+
+            //æ³¨å…¥æœåŠ¡,æ•´ä¸ªåº”ç”¨ç¨‹åºç”Ÿå‘½å‘¨æœŸä»¥å†…åªåˆ›å»ºä¸€ä¸ªå®ä¾‹ 
+            services.AddSingleton<IDepartmentService, DepartmentService>();
+            services.AddSingleton<IEmployeeService, EmployeeService>();
         }
         //public void ConfigureDevelopment(IApplicationBuilder app, IWebHostEnvironment env)
         //{
-        //    //¿ª·¢»·¾³½øÈë
+        //    //å¼€å‘ç¯å¢ƒè¿›å…¥
         //}
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -33,32 +37,32 @@ namespace Three
             //env.IsEnvironment("OK");
             if (env.IsDevelopment())
             {
-                //¿ª·¢»·¾³½øÈë´ËÅĞ¶Ï
+                //å¼€å‘ç¯å¢ƒè¿›å…¥æ­¤åˆ¤æ–­
                 app.UseDeveloperExceptionPage();
             }
-            //¾²Ì¬ÎÄ¼şÖĞ¼ä¼ş
+            //é™æ€æ–‡ä»¶ä¸­é—´ä»¶
             app.UseStaticFiles();
 
-            //Ç¿ÖÆÌø×ªHTTPSµÄÖĞ¼ä¼ş
+            //å¼ºåˆ¶è·³è½¬HTTPSçš„ä¸­é—´ä»¶
             app.UseHttpsRedirection();
 
-            //Éí·İÈÏÖ¤ ±ØĞë·ÅÔÚUseEndpointsÖ®Ç°
+            //èº«ä»½è®¤è¯ å¿…é¡»æ”¾åœ¨UseEndpointsä¹‹å‰
             app.UseAuthentication();
-            //Â·ÓÉÖĞ¼ä¼ş
+            //è·¯ç”±ä¸­é—´ä»¶
             app.UseRouting();
 
-            //¶ËµãÖĞ¼ä¼ş
+            //ç«¯ç‚¹ä¸­é—´ä»¶
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                //endpoints.MapGet("/", async context =>
+                //{
+                //    await context.Response.WriteAsync("Hello World!");
+                //});
 
-                //endpoints.MapControllers();//attr·½·¨
-                //endpoints.MapControllerRoute(
-                //    "default",
-                //    "{controller=Home}/{action=Index}/{id?}");
+                //endpoints.MapControllers();//attræ–¹æ³•
+                endpoints.MapControllerRoute(
+                    "default",
+                    "{controller=Department}/{action=Index}/{id?}");
             });
         }
     }
