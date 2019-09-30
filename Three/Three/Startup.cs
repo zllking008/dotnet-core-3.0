@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Three.Services;
@@ -13,6 +14,14 @@ namespace Three
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            //var three = _configuration["Three:BoldDepartmentEmployeeCountThreshold"];直接取appsettings.json里面的值，
+            
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -25,6 +34,10 @@ namespace Three
             //注入服务,整个应用程序生命周期以内只创建一个实例 
             services.AddSingleton<IDepartmentService, DepartmentService>();
             services.AddSingleton<IEmployeeService, EmployeeService>();
+
+            //注入appsettings.json配置中的Three下的节点
+            services.Configure<ThreeOptions>(_configuration.GetSection("Three"));
+
         }
         //public void ConfigureDevelopment(IApplicationBuilder app, IWebHostEnvironment env)
         //{

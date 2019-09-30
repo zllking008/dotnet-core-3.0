@@ -1,4 +1,5 @@
 ﻿@using Three.Models;
+
 @model IEnumerable<Department>
 
 <div class="row">
@@ -15,7 +16,15 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4 offset-md-2">
-        <a asp-action="Add">Add</a>
-    </div>
-</div>
+    <div class="col-md-2">
+        @*此写法为异步调用的方式将viewcomponent引用出来*@
+        @await Component.InvokeAsync("CompanySummary", new { title = "部门列表页的汇总" })
+
+        @*此标签写法需要在_ViewImports.cshtml中做引用*@
+                <vc:company-summary title="部门列表页的汇总2"></vc:company-summary>
+
+            </div>
+            <div class="col-md-4">
+                <a asp-action="Add">Add</a>
+            </div>
+        </div>

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,11 +18,15 @@ namespace Three
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+            //.ConfigureAppConfiguration((context,configBuilder)=> {
+            //    configBuilder.Sources.Clear();//清理所有其他源配置json
+            //    configBuilder.AddJsonFile("myconfig.json");//注入自定义 myconfig.json
+            //})
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     //webBuilder.ConfigureAppConfiguration();
                     webBuilder.UseStartup<Startup>();
-                    //webBuilder.UseStartup(typeof(Program));//���ó���
+                    //webBuilder.UseStartup(typeof(Program));//引用程序集
                     //webBuilder.UseKestrel();
                 });
     }
