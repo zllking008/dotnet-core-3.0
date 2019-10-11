@@ -1,13 +1,11 @@
 ﻿@model Three.Models.Department
 
+<tr>
+    <td>@Model.Name</td>
+    <td>@Model.Location</td>
+    <td>@Model.EmployeeCount</td>
 
-
-    <tr>
-        <td>@Model.Name</td>
-
-        <td>@Model.Location</td>
-        <td>@Model.EmployeeCount</td>
-        <td>
-            
-        </td>
-    </tr>
+    <td>
+        <a asp-page="Employee/EmployeeList" asp-route-departmentId="@Model.Id">Employees</a>
+    </td>
+</tr>
