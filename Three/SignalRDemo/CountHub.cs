@@ -11,6 +11,7 @@ namespace SignalRDemo
 {
     //身份认证
     //[Authorize]
+    
     public class CountHub:Hub
     {
         private readonly CountService _countService;
@@ -36,7 +37,7 @@ namespace SignalRDemo
 
         public override async Task OnConnectedAsync()
         {
-
+            
             //var connectionId = Context.ConnectionId;//获得当前连接hub的唯一标识
             //var client = Clients.Client(connectionId);//获得当前的客户端
 

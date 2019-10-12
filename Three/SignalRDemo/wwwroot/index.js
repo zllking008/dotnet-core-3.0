@@ -1,7 +1,7 @@
 ﻿let connection = null;
 setupConnection = () => {
     connection = new signalR.HubConnectionBuilder()
-        .withUrl("/countHub")//默认协议按照从最高到最低降级
+        .withUrl("/countHub")//默认协议按照从最高到最低降级,请求后台CountHub类，驼峰形式
         //.withUrl("/countHub", signalR.HttpTransportType.LongPolling)//指定用longpolling协议
         .build();
 
