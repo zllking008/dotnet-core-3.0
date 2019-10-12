@@ -29,7 +29,7 @@ namespace ThreePage
             //注入服务,整个应用程序生命周期以内只创建一个实例 
             services.AddSingleton<IDepartmentService, DepartmentService>();
             services.AddSingleton<IEmployeeService, EmployeeService>();
-
+            //services.AddSingleton<EmployeeService>();
             //注入appsettings.json配置中的Three下的节点
             services.Configure<ThreeOptions>(_configuration.GetSection("Three"));
         }
