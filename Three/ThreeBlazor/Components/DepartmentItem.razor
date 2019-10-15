@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Components
+
+    <tr>
+        <td>@Department.Name</td>
+        <td>@Department.Location</td>
+        @if (Department.EmployeeCount > 50)
+        {
+            <td><b>@Department.EmployeeCount</b></td>
+        }
+        else
+        {
+            <td>@Department.EmployeeCount</td>
+        }
+
+        <td>
+            <a href="Employee/@Department.Id">Employees</a>
+        </td>
+    </tr>
+
+@code
+{
+    [Parameter]
+    public Department Department { get; set; }
+
+}

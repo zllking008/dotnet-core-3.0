@@ -1,0 +1,28 @@
+﻿@inject IEmployeeService employeeService
+    <tr>
+        <td>@Employee.FirstName</td>
+        <td>@Employee.LastName</td>
+        <td>@Employee.Gender</td>
+        <td>@(Employee.Fired ? "是" : "否")</td>
+        <td>
+            @if (!Employee.Fired)
+            {
+                <a href="javascript:;" @onclick="HandleFire">
+                    Fire
+                </a>
+            }
+
+        </td>
+    </tr>
+@code
+{
+
+    [Parameter]
+    public Employee Employee { get; set; }
+
+    private async  Task HandleFire()
+    {
+        await employeeService.Fire(Employee.Id);
+    }
+
+}
