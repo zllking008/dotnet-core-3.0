@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,8 +26,8 @@ namespace Three
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddMvc(); MVC的所有功能，很全面，引入也很多
-            services.AddControllersWithViews();//MVC的主要功能，web网站适用
+            services.AddMvc(); //MVC的所有功能，很全面，引入也很多
+            //services.AddControllersWithViews();//MVC的主要功能，web网站适用
             //services.AddControllers();//仅使用api 注册
             //services.AddRazorPages();//使用RazorPage模式
             //services.AddSingleton<IClock, ChinaClock>();
@@ -38,6 +39,9 @@ namespace Three
             //注入appsettings.json配置中的Three下的节点
             services.Configure<ThreeOptions>(_configuration.GetSection("Three"));
 
+            //注入缓存中间件
+            services.AddMemoryCache();
+
         }
         //public void ConfigureDevelopment(IApplicationBuilder app, IWebHostEnvironment env)
         //{
@@ -45,13 +49,19 @@ namespace Three
         //}
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //app.UseWelcomePage();//logging 中间件，一般用于网站维护
             //env.IsProduction();
             //env.IsStaging();
             //env.IsEnvironment("OK");
             if (env.IsDevelopment())
             {
                 //开发环境进入此判断
+                //显示异常详细信息
                 app.UseDeveloperExceptionPage();
+
+                app.UseStatusCodePages();//页面发生错误的时候显示状态码
+                //发生异常的时候跳转到的页面
+                //app.UseExceptionHandler("/Home/error");
             }
             //静态文件中间件
             app.UseStaticFiles();
@@ -64,7 +74,8 @@ namespace Three
             //路由中间件
             app.UseRouting();
 
-            //端点中间件
+            
+            ////端点中间件
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapGet("/", async context =>
@@ -76,6 +87,8 @@ namespace Three
                 endpoints.MapControllerRoute(
                     "default",
                     "{controller=Department}/{action=Index}/{id?}");
+                
+
             });
         }
     }

@@ -9,7 +9,7 @@
             <label asp-for="Department.Name"></label>
         </div>
         <div class="col-md-6">
-            <input class="form-control" asp-for="Department.Name" />
+            <input id="txtName" class="form-control" asp-for="Department.Name" />
         </div>
     </div>
     <div class="row form-group">
@@ -17,7 +17,7 @@
             <label asp-for="Department.Location"></label>
         </div>
         <div class="col-md-6">
-            <input class="form-control" asp-for="Department.Location" />
+            <input id="txtLocation" class="form-control" asp-for="Department.Location" />
         </div>
     </div>
     <div class="row form-group">
@@ -25,13 +25,40 @@
             <label asp-for="Department.EmployeeCount"></label>
         </div>
         <div class="col-md-6">
-            <input class="form-control" asp-for="Department.EmployeeCount" />
+            <input id="txtEmployeeCount" class="form-control" asp-for="Department.EmployeeCount" />
         </div>
     </div>
     <div class="row">
         <div class="col-md-2 offset-md-2">
             <button type="submit" class="btn btn-primary">Add</button>
+            <button type="button" class="btn btn-primary" onclick="checkForm()">ajax add</button>
         </div>
 
     </div>
+    <script type="text/javascript">
+        function checkForm() {
+            var _data = {
+                
+                "Name": $("#txtName").val(),
+                "Location": $("#txtLocation").val(),
+                "EmployeeCount": parseInt($("#txtEmployeeCount").val())
+            };
+            $.ajax({
+               type: "POST",
+                url: "/Department/AddDepartment?handler=Add",
+                data: JSON.stringify(_data),
+                contentType:"application/json"
+            }).done(function (json) {
+                 if (!json.isSuccess) {
+                        alert("添加失败： " + json.msg);
+                    }
+                    else {
+                        alert(json.msg);
+                        window.location.href = "/index";
+                    }
+            });
+        }
+
+
+    </script>
 </form>
