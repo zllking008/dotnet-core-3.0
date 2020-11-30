@@ -9,6 +9,7 @@ namespace Three.Services
     public class DepartmentService : IDepartmentService
     {
         private readonly List<Department> _departments = new List<Department>();
+        public int ticket { get; set; }
 
         public DepartmentService()
         {
@@ -80,6 +81,11 @@ namespace Three.Services
                     AverageDepartmentEmployeeCount = (int)_departments.Average(m => m.EmployeeCount)
                 };
             });
+        }
+
+        public Task<int> TicketAdd()
+        {
+            return Task.FromResult(++ticket);
         }
     }
 }

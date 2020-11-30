@@ -16,7 +16,10 @@
         </table>
     </div>
 </div>
+<div>
+    ticket计数：@Model.ticket
 
+</div>
 <div class="row">
     <div class="col-md-4 offset-md-2">
         <a asp-page="Department/AddDepartment">Add</a>
@@ -31,10 +34,12 @@
 
 @functions{
     public IEnumerable<Three.Models.Department> Departments { get; set; }
+    public int ticket { get; set; }
 
     public async Task OnGetAsync()
     {
         Departments = await departmentService.GetAll();
+        ticket = await departmentService.TicketAdd();
         ViewBag.Title = "Razor Page Index";
     }
 

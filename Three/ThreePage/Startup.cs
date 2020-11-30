@@ -28,13 +28,21 @@ namespace ThreePage
             services.AddRazorPages().AddRazorPagesOptions(o =>
             {
                 o.Conventions.ConfigureFilter(new Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute());
-            }); 
+                
+            });
+            services.AddMvc().AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();//json字符串大小写原样输出
+            });
             //注入服务,整个应用程序生命周期以内只创建一个实例 
             services.AddSingleton<IDepartmentService, DepartmentService>();
             services.AddSingleton<IEmployeeService, EmployeeService>();
             //services.AddSingleton<EmployeeService>();
             //注入appsettings.json配置中的Three下的节点
             services.Configure<ThreeOptions>(_configuration.GetSection("Three"));
+
+            //解决数据访问跨域问题
+            services.AddCors(c=>c.AddPolicy("any",p=>p.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
             
         }
 
@@ -49,18 +57,21 @@ namespace ThreePage
             app.UseStaticFiles();
 
             //强制跳转HTTPS的中间件
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             //身份认证 必须放在UseEndpoints之前
             app.UseAuthentication();
             //路由中间件
             app.UseRouting();
+            //解决数据访问跨域问题,放在UseRouting后面 , 在控制器上或者razorPage 上写上特性：EnableCors("any")
+            app.UseCors();
 
             //端点中间件
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
             });
+
         }
     }
 }

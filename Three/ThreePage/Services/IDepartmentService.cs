@@ -15,5 +15,7 @@ namespace Three.Services
         Task<CompanySummary> GetCompanySummary();
 
         Task Add(Department department);
+
+        Task<int> TicketAdd();
     }
 }

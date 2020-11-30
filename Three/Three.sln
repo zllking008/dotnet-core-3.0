@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalRDemo", "SignalRDemo\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreeBlazor", "ThreeBlazor\ThreeBlazor.csproj", "{E45F3E2F-3BCD-49CB-8634-3FBD7C145E0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomRouteDemo", "CustomRouteDemo\CustomRouteDemo.csproj", "{23A73673-5387-4CC4-A335-CED19654AA64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyMiddleware", "MyMiddleware\MyMiddleware.csproj", "{18CAABF5-36BA-4E26-A8E9-9BE189AFBD24}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4EC2252F-270B-4E8A-A9E0-2D35A5EB5862}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +40,10 @@ Global
 		{E45F3E2F-3BCD-49CB-8634-3FBD7C145E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E45F3E2F-3BCD-49CB-8634-3FBD7C145E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E45F3E2F-3BCD-49CB-8634-3FBD7C145E0A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{23A73673-5387-4CC4-A335-CED19654AA64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23A73673-5387-4CC4-A335-CED19654AA64}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{23A73673-5387-4CC4-A335-CED19654AA64}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{23A73673-5387-4CC4-A335-CED19654AA64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18CAABF5-36BA-4E26-A8E9-9BE189AFBD24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18CAABF5-36BA-4E26-A8E9-9BE189AFBD24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18CAABF5-36BA-4E26-A8E9-9BE189AFBD24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18CAABF5-36BA-4E26-A8E9-9BE189AFBD24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

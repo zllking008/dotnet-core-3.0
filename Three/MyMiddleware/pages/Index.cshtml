@@ -1,0 +1,16 @@
+﻿@page
+@model MyMiddleware.IndexModel
+@{
+}
+
+<div>
+    @if (MyMiddleware.UserService.IsLogin)
+    {
+        <div>当前登陆 @MyMiddleware.UserService.CurrentJson</div>
+    }
+    else
+    {
+        <p>未登录</p>
+    }
+
+</div>
